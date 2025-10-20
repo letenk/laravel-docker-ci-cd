@@ -1,16 +1,17 @@
 services:
   app:
-    build: .
-    dockerfile: docker/php/Dockerfile
-  image: ${APP_IMAGE}
-  container_name: ${APP_SERVICE_NAME}
-  working_dir: ${APP_WORKDIR}
-  volumes:
-    - ./laravel/:${APP_WORKDIR}
-  ports:
-    - "${APP_PORT}:9000"
-  depends_on:
-    - mysql
+    build: 
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    image: ${APP_IMAGE}
+    container_name: ${APP_SERVICE_NAME}
+    working_dir: ${APP_WORKDIR}
+    volumes:
+      - ./laravel/:${APP_WORKDIR}
+    ports:
+      - "${APP_PORT}:9000"
+    depends_on:
+      - mysql
   
   nginx:
     image: nginx:latest
